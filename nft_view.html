@@ -1,0 +1,814 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Energy Mark</title>
+		<meta charset="utf-8" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1><a href="index.html"><img src="images/logo.png" alt="" width="130" height="48" class="d-inline-block"></a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html" >Home</a></li>
+							<li>
+								<a href="manage_farmers.html" class="icon solid fa-angle-down">Energy Farmers</a>
+								<ul>
+									<li><a href="manage_farmers.html">Manage Energy Farmers</a></li>
+									<li><a href="energy_catalog.html">Manage Energy Catalog</a></li>
+								</ul>
+							</li>
+							<li class="active">
+								<a href="wallet.html" class="icon solid fa-angle-down">Energy Marketplace</a>
+								<ul>
+									<li ><a href="wallet.html">Energy Wallet</a></li>
+									<li><a href="nft_view.html">Energy NFT Contracts</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="manage_consumers.html">Energy Buyers</a>
+							</li>
+							<li>
+								<a href="contact.html">Contact us</a>
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Energy NFT Contracts</h2>
+					</header>
+					<div class="box">
+						
+						<button class="button special" id="mintfrm" onclick="mintFormBtn()" data-bs-toggle="modal" data-bs-target="#Modal" >Mint New Energy Contract as NFT</button>
+						<button class="button alt special" id="mynftfrm" onclick="listMyNFT()">List My Energy Contracts as NFT's</button>
+						<form method = "post" id="searchForm" style="visibility:hidden; display:none"></form>
+						<div id="myNFTGrid" ></div>
+						<div id="feedbackGrid"><h4>Please wait... Fetching all Energy Contracts as NFT</h4></div>
+					</div>
+					
+				</section>
+			  <!-- Modal -->
+				<div class="modal fade" style="margin-top: 2em;" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" 
+				aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="ModalLabel">Upload energy contract as NFT</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="window.location.reload()"></button>
+						</div>
+						<div class="modal-body">
+							<form method="post" id="buyForm"></form>
+							<form method="post" id="mintForm"></form>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="window.location.reload()">Close</button>
+						
+						</div>
+					</div>
+					</div>
+				</div>
+					
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Energy Mark. All rights reserved.</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+            <script src="https://www.jsviews.com/download/jsviews.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+			<!-- <script src="assets/js/upload_pinata.js"></script> -->
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/deps/jquery.min.js"></script>
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/deps/underscore.js"></script>
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/deps/opt/jsv.js"></script>
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/lib/jsonform.js"></script>
+			<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+			<link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+			<script type="text/javascript">
+				// $('#feedbackGrid').hide();
+				$('#searchForm').jsonForm({
+					schema: {
+							  AccountAddress:{
+								type: 'string',
+								required: true
+							  },
+							},
+					form: [
+							{
+								key: "AccountAddress",
+								type: "text",
+								htmlMetaData:{
+									style:"width: 330px"
+								},
+								placeholder: "Enter Account Address",
+								notitle:true,
+							},
+							{
+								type: "submit",
+								title:"List My Energy Contracts as NFT's"
+							},
+							{
+								type: "button",
+								title: "Close",
+								onClick: function (evt) {
+									window.location.reload()        
+									}
+							}
+						],
+						onSubmit: function (errors, values){
+							if (errors) {
+								$('#res').html('<p>Please fill required fields!</p>');
+							  }
+							else {
+							console.log(values);
+							$('#feedbackGrid').hide()
+							$('#myNFTGrid').html("<h4>please Wait while we fetch your nfts owned by "+ values.AccountAddress +"</h4>")
+							var paramsObj = {};
+							paramsObj.type = "NFTMarket";
+							paramsObj.queryType = "list_my_nft";
+							var record = {}
+							record.AccountAddress = values.AccountAddress
+							paramsObj.record = record;
+							let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj)
+							fetch(url)
+							.then(response=>response.json())
+							.then(data=>{
+								$('#myNFTGrid').html("")
+								$('#myNFTGrid').show();
+								grid = new ej.grids.Grid({
+								dataSource: data,
+								allowSelection: true,
+								allowFiltering: true,
+								allowTextWrap : true ,
+								allowSorting: true,
+								allowPaging: true,
+								enableVirtualization: true,
+								toolbar: ['Search'],
+								filterSettings: { type: 'Menu' },
+								selectionSettings: { persistSelection: true, type: "Multiple", checkboxOnly: true },
+								enableHover: false,
+								enableHeaderFocus: true,
+								pageSettings: { pageCount: 4, pageSizes: true },
+								height: 400,
+								rowHeight: 30,
+								rowDataBound: rowBound,
+								columns: [
+									{ field: 'TokenId', headerText: 'ID',width:100 },
+									{ field: 'File', template:"#file_template", headerText: 'Contract URL',width:100 },
+									{ field: 'Name', headerText: 'Name',width:130  },
+									{ field: 'Description', headerText: 'Description',width:130  },
+									{ field: 'Price', headerText: 'Price (in Matic)',width:130  },
+									{ field: 'Seller', headerText: 'Seller Address',width:130  },
+									{ field: 'Owner', headerText: 'Owner' ,visible:false},
+									{ field: 'Listed', headerText: 'Listed' ,visible:false},
+									{ headerText: 'Actions', width: 100,
+										commands: [
+										{ type: 'Transaction_History', buttonOption: { iconCss: ' e-icons e-clock', cssClass: 'e-flat' } },
+											{ type: 'ReList NFT', buttonOption: { iconCss: ' e-icons e-refresh', cssClass: 'e-flat' } }
+										]
+									}
+								],
+								commandClick: (args) => {
+									debugger
+									if(args.commandColumn.type == "ReList NFT"){
+									//handleUpdateFeedback();
+									showModal("Relist NFT");
+									
+									$('#feedbackGrid').hide();
+									$('myNFTGrid').hide();
+									let updateFormEle = document.querySelector("#buyForm");
+									updateFormEle.style.display = "";
+									$('#buyForm').html("");
+									$('#buyForm').jsonForm({
+										schema: {
+										TokenId:{
+											type:'number',
+											readonly : true
+										},
+										NFTName:{
+											type: 'string',
+											readonly : true
+										},
+										NFTDescription:{
+											type: 'string',
+											readonly : true
+										},
+										AccountAddress:{
+											type: 'string',
+											readonly:true
+										},
+										NFTPrice:{
+											type: 'number',
+											required: true
+										},
+										PrivateKey:{
+											type: 'password',
+											required: true
+										}
+										},
+										value: {
+											TokenId: `${args.rowData.TokenId}`,
+											NFTName: `${args.rowData.Name}`,
+											NFTDescription: `${args.rowData.Description}`,
+											AccountAddress:`${args.rowData.Seller}`,
+										},
+										form: [
+												{
+												key: "TokenId",
+												type: "text"
+												},
+												{
+												key: "NFTName",
+												title:"NFT Name",
+												type: "text"
+												},
+												{
+												key: "NFTDescription",
+												title:"NFT Description",
+												type: "textarea"
+												},
+												{
+												key: "NFTPrice",
+												title:"NFT Price",
+												type: "text"
+												},
+												{
+												key: "AccountAddress",
+												type: "text",
+												description:"For demo use address:<b>0x94771B35e2f5070e35c3dF74F9c47DcC5ACFED33</b> "
+												},
+												{
+												key: "PrivateKey",
+												type: "password",
+												description: getPrivateKey("0x94771B35e2f5070e35c3dF74F9c47DcC5ACFED33")
+												},
+												{
+												type: "submit",
+												title: "Relist NFT"
+												},
+												{
+												type: "button",
+												title: "Cancel",
+												onClick: function (evt) {
+													window.location.reload()        
+													}
+												} 
+											],
+										onSubmit: function (errors, values) {
+										if (errors) {
+											$('#res').html('<p>Please fill required fields!</p>');
+										}
+										else {
+											console.log(values);
+											$('#buyForm').hide()
+											$('.modal-body').html("Payment is processing")
+											var paramsObj = {};
+											paramsObj.type = "NFTMarket";
+											paramsObj.queryType = "relist_nft";
+											var record = {};
+											record.TokenId = values.TokenId;
+											record.Price = values.NFTPrice;
+											record.AccountAddress = values.AccountAddress;
+											record.PrivateKey = values.PrivateKey;
+											paramsObj.record = record;
+											let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj);
+											fetch(url)
+											.then(response=>response.json())
+											.then(data=>{
+												console.log(data)
+												if(data.message == "Success"){
+													var trans_hsh_url = "https://mumbai.polygonscan.com/tx/"+data.hash
+													$('.modal-body').html("ReListing is done Click on hash to view your transaction reciept "+"<h4><a href='"+trans_hsh_url +"' target='_blank' rel='noopener noreferrer'>"+ data.hash +"</a></h4>")
+												}
+												else{
+													$('.modal-body').html("There is an error please try after some time "+data.error)
+												}
+											
+											})
+										}
+										}
+									});
+									}
+									else if(args.commandColumn.type == "Transaction_History"){
+									//handleUpdateFeedback();	
+									//   if (confirm("Press a button!")) {
+									// 	txt = "You pressed OK!";
+									// } else {
+									// 	txt = "You pressed Cancel!";
+									// 	}
+									token_id = args.rowData.TokenId;
+									url_string = "https://mumbai.polygonscan.com/token/0xcf9c9d131f6042f9d1be2251ef318346dcb25129?a="+token_id
+									alert("You will redirected to another tab to view transactions")
+									window.open(url_string,'_blank')
+									}
+								}
+								})
+								grid.appendTo('#myNFTGrid');
+								function rowBound(args) {
+									console.log(args.data.Listed)
+									if(args.data.Listed === true){
+										args.row.querySelector('.e-refresh').parentNode.remove()
+									}
+								}
+								
+							});
+							
+								}
+							}
+						})
+				document.addEventListener("DOMContentLoaded", _ =>{
+				  // $('#feedbackGrid').hide();
+				  var paramsObj = {}
+				  paramsObj.type = "NFTMarket";
+				  paramsObj.queryType = "list_all_nft";
+				  paramsObj.record = {};
+			
+				  let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj)
+				  fetch(url)
+				  .then(response=>response.json())
+				  .then(data=>{
+					$('#feedbackGrid').html("")
+					$('#feedbackGrid').show();
+					grid = new ej.grids.Grid({
+					  dataSource: data,
+					  allowSelection: true,
+					  allowFiltering: true,
+					  allowTextWrap : true ,
+					  allowSorting: true,
+					  allowPaging: true,
+					  enableVirtualization: true,
+					  toolbar: ['Search'],
+					  filterSettings: { type: 'Menu' },
+					  selectionSettings: { persistSelection: true, type: "Multiple", checkboxOnly: true },
+					  enableHover: false,
+					  enableHeaderFocus: true,
+					  pageSettings: { pageCount: 4, pageSizes: true },
+					  height: 400,
+					  rowHeight: 30,
+					  columns: [
+						  { field: 'TokenId', headerText: 'ID',width:100 },
+                          { field: 'File', template:"#file_template", headerText: 'Contract URL',width:100 },
+						  { field: 'Name', headerText: 'Name',width:130  },
+						  { field: 'Description', headerText: 'Description',width:130  },
+						  { field: 'Price', headerText: 'Price (in Matic)',width:130  },
+						  { field: 'Seller', headerText: 'Seller Address',width:130  },
+						  { field: 'Owner', headerText: 'Owner' ,visible:false},
+						  { headerText: 'Actions', width: 100,
+							  commands: [
+							  { type: 'Transaction_History', buttonOption: { iconCss: ' e-icons e-clock', cssClass: 'e-flat' } },
+								{ type: 'Buy NFT', buttonOption: { iconCss: ' e-icons e-bring-forward', cssClass: 'e-flat' } },
+							]
+						  }
+					  ],
+                      commandClick: (args) => {
+						debugger
+						if(args.commandColumn.type == "Buy NFT"){
+						  //handleUpdateFeedback();
+						  showModal("Buy NFT");
+						  
+						  $('#feedbackGrid').hide();
+						  let updateFormEle = document.querySelector("#buyForm");
+						  updateFormEle.style.display = "";
+						  $('#buyForm').html("");
+						  $('#buyForm').jsonForm({
+							schema: {
+							 TokenId:{
+								type:'number',
+								readonly : true
+							 },
+							  NFTName:{
+								type: 'string',
+								readonly : true
+							  },
+							  NFTDescription:{
+								type: 'string',
+								readonly : true
+							  },
+							  NFTPrice:{
+								type: 'number',
+								readonly : true
+							  },
+							  Seller:{
+								type: 'string',
+								readonly : true
+							  },
+							  AccountAddress:{
+								type: 'string',
+								required:true
+							  },
+							  PrivateKey:{
+								type: 'password',
+								required: true
+							  }
+							},
+							value: {
+								TokenId: `${args.rowData.TokenId}`,
+								NFTName: `${args.rowData.Name}`,
+								NFTDescription: `${args.rowData.Description}`,
+								NFTPrice: `${args.rowData.Price}`,
+								Seller:`${args.rowData.Seller}`,
+							},
+							form: [
+									{
+									  key: "TokenId",
+									  type: "text"
+									},
+									{
+									  key: "NFTName",
+									  title:"NFT Name",
+									  type: "text"
+									},
+									{
+									  key: "NFTDescription",
+									  title:"NFT Description",
+									  type: "textarea"
+									},
+									{
+									  key: "NFTPrice",
+									  title:"NFT Price",
+									  type: "text"
+									},
+									{
+									  key: "Seller",
+									  title:"Seller Address",
+									  type: "text"
+									},
+									{
+									  key: "AccountAddress",
+									  title:"Account Address",
+									  type: "text",
+									  description:"For demo use address:<b>0x94771B35e2f5070e35c3dF74F9c47DcC5ACFED33</b> "
+									},
+									{
+									  key: "PrivateKey",
+									  title:"Private Key",
+									  type: "password",
+									  description: getPrivateKey("0x94771B35e2f5070e35c3dF74F9c47DcC5ACFED33")
+									},
+									{
+									  type: "submit",
+									  title: "Buy NFT"
+									},
+									{
+									  type: "button",
+									  title: "Cancel",
+									  onClick: function (evt) {
+										window.location.reload()        
+										}
+									} 
+								  ],
+							onSubmit: function (errors, values) {
+							  if (errors) {
+								$('#res').html('<p>Please fill required fields!</p>');
+							  }
+							  else {
+								console.log(values);
+								$('#buyForm').hide()
+								$('.modal-body').html("Payment is processing")
+								var paramsObj = {};
+								paramsObj.type = "NFTMarket";
+								paramsObj.queryType = "buy_nft";
+								var record = {};
+								record.TokenId = values.TokenId;
+								record.Price = values.NFTPrice;
+								record.AccountAddress = values.AccountAddress;
+								record.PrivateKey = values.PrivateKey;
+								paramsObj.record = record;
+								let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj);
+								fetch(url)
+								.then(response=>response.json())
+								.then(data=>{
+									console.log(data)
+									if(data.message == "Success"){
+										var trans_hsh_url = "https://mumbai.polygonscan.com/tx/"+data.hash
+										$('.modal-body').html("Payment is done Click on hash to view your transaction reciept "+"<h4><a href='"+trans_hsh_url +"' target='_blank' rel='noopener noreferrer'>"+ data.hash +"</a></h4>")
+									}
+									else{
+										$('.modal-body').html("There is an error please try after some time "+data.error)
+									}
+								  
+								})
+							  }
+							}
+						  });
+						}
+						else if(args.commandColumn.type == "Transaction_History"){
+						  //handleUpdateFeedback();
+						//   if (confirm("Press a button!")) {
+						// 	txt = "You pressed OK!";
+						// } else {
+						// 	txt = "You pressed Cancel!";
+						// 	}
+						  token_id = args.rowData.TokenId;
+						  url_string = "https://mumbai.polygonscan.com/token/0xcf9c9d131f6042f9d1be2251ef318346dcb25129?a="+token_id
+						  alert("You will redirected to another tab to view transactions")
+						  window.open(url_string,'_blank')
+						}
+                    }
+                    })
+					grid.appendTo('#feedbackGrid');
+					
+				  });
+				  
+				});
+
+				showModal = (title) =>{
+					$('#ModalLabel').html(title);
+					$('#Modal').modal('show')
+				}
+
+				mintFormBtn = () =>{
+				  
+				  let mintFormEle = document.querySelector("#mintForm");
+				  mintFormEle.style.display = "";
+				  $('#feedbackGrid').hide();
+				  $('#mintbtn').hide();
+				  $('#mintForm').html("");
+				  let newUuid = uuidv4();
+				  $('#mintForm').jsonForm({
+					schema: {
+							  NFTName:{
+								type: 'string',
+								required: true
+							  },
+							  NFTDescription:{
+								type: 'string',
+								required: true
+							  },
+							  NFTPrice:{
+								type: 'number',
+								required: true
+							  },
+							  NFTFile:{
+								type: 'string'
+							  },
+							  AccountAddress:{
+								type: 'string',
+								required:true
+							  },
+							  PrivateKey:{
+								type: 'password',
+								required:true
+							  }
+							},
+					form: [
+					  {
+						key: "NFTName",
+						title: "Name",
+						type: "text"
+					  },
+					  {
+						key: "NFTDescription",
+						title: "Description",
+						type: "textarea"
+					  },
+					  {
+						key: "NFTPrice",
+						title: "Price",
+						type: "text"
+					  },
+					  {
+						key: "NFTFile",
+						title: "Price",
+						type:"file",
+					  },
+					  {
+						key: "AccountAddress",
+						title: "Account Address",
+						type: "text",
+						description:"For demo use address:<b>0x94771B35e2f5070e35c3dF74F9c47DcC5ACFED33</b> "
+					  },
+					  {
+						key: "PrivateKey",
+						title:"Private Key",
+						type: 'password',
+						description: getPrivateKey("0x94771B35e2f5070e35c3dF74F9c47DcC5ACFED33")
+					  },
+					  {
+						type: "submit",
+						title: "Mint NFT"
+					  },
+					  {
+						type: "button",
+						title: "Cancel",
+						onClick: function (evt) {
+						window.location.reload()        
+						}
+					} 
+					],
+					onSubmit: function (errors, values) {
+					  if (errors) {
+						$('#res').html('<p>Please fill required fields!</p>');
+					  }
+					  else {
+						// event.preventDefault();
+						var file_con = document.getElementsByName('NFTFile')[0];
+						$('#mintForm').hide()
+						$('.modal-body').html("Payment is processing")
+						uploadFileToIPFS(file_con.files[0])
+						.then(data => {
+							if(data.success === true){
+								json_params = {
+									name: values.NFTName,
+									description : values.NFTDescription,
+									fileUrl: data.pinataURL
+								}
+								uploadJSONToIPFS(json_params)
+									.then(json_data => {
+										if(json_data.success === true){
+											var paramsObj = {};
+											paramsObj.type = "NFTMarket";
+											paramsObj.queryType = "mint_nft";
+											var record = {}
+											record.AccountAddress = values.AccountAddress
+											record.PrivateKey = values.PrivateKey
+											record.Price = values.NFTPrice
+											record.TokenUri = json_data.pinataURL
+											paramsObj.record = record
+											let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj);
+											fetch(url)
+											.then(handleErrors)
+											.then(response=>response.json())
+											.then(res_data=>{
+												console.log(res_data)
+												if(res_data.message == "Success"){
+													var trans_hsh_url = "https://mumbai.polygonscan.com/tx/"+res_data.hash
+													$('.modal-body').html("Payment is done Click on hash to view your transaction reciept "+"<h4><a href='"+trans_hsh_url +"' target='_blank' rel='noopener noreferrer'>"+ res_data.hash +"</a></h4>")
+												}
+												else{
+													$('.modal-body').html("There is an error please try after some time "+res_data.error)
+												}
+											
+											})
+										}
+								})
+							}
+						})
+						
+
+						
+
+					  }
+					}
+				  });
+				  
+				}
+				const uploadJSONToIPFS = async(JSONBody) => {
+						const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+						//making axios POST request to Pinata ⬇️
+						return axios 
+							.post(url, JSONBody, {
+								headers: {
+									pinata_api_key: "409965d5efcd315f8177",
+									pinata_secret_api_key: "4ba787b2f1375462541325988e1b001bca8ab3f5485a27a41019902c50fe3b6e",
+								}
+							})
+							.then(function (response) {
+							return {
+								success: true,
+								pinataURL: "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash
+							};
+							})
+							.catch(function (error) {
+								console.log(error)
+								return {
+									success: false,
+									message: error.message,
+								}
+
+						});
+					};
+
+					const uploadFileToIPFS = async (file) => {
+					const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+					//making axios POST request to Pinata ⬇️
+
+					let data = new FormData();
+					data.append('file', file);
+
+					const metadata = JSON.stringify({
+						name: 'EnergyFilename',
+						keyvalues: {
+							exampleKey: 'EnergyValue'
+						}
+					});
+					data.append('pinataMetadata', metadata);
+
+					//pinataOptions are optional
+					const pinataOptions = JSON.stringify({
+						cidVersion: 1,
+					});
+					data.append('pinataOptions', pinataOptions);
+
+					return axios
+						.post(url, data, {
+							method: 'POST',
+							maxBodyLength: 'Infinity',
+							headers: {
+								'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+								pinata_api_key: "409965d5efcd315f8177",
+								pinata_secret_api_key: "4ba787b2f1375462541325988e1b001bca8ab3f5485a27a41019902c50fe3b6e",
+							}
+						})
+						.then(function (response) {
+							console.log("image uploaded", response.data.IpfsHash)
+							return {
+							success: true,
+							pinataURL: "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash
+						};
+						})
+						.catch(function (error) {
+							console.log(error)
+							return {
+								success: false,
+								message: error.message,
+							}
+
+					});
+					};
+
+
+				function listMyNFT(){
+					$("#mintfrm").css({
+						display: "none",
+						visibility: "hidden"
+						});
+					$("#feedbackGrid").css({
+						display: "none",
+						visibility: "hidden"
+						});
+					$("#mynftfrm").css({
+					display: "none",
+					visibility: "hidden"
+					});
+					$('#searchForm').css({
+					display: "",
+					visibility: "visible"
+					});
+						
+				}
+
+				function getPrivateKey(address){
+					address_private = {
+						"0x1643F0E3778F159F2EF0a9b750BA4fbbCae789d6":"0xe59acf1ec9e89ae582118e489384176659ba5e8adffeb0900c3dd9ba918e3017",
+						"0xB3e075675ABcC7840392f43E703EDab3c9e30C39":"0x4e87a71c34bbcc1f3f8564f2196542312763cc14c72a4e9a73a0d7430232026d",
+						"0x12C1dBe2336F70287BA1a83E1e852f80AAf553be":"0xd7fe008023346302dbeeee4a81815cad62791b41a936e13e8eb8ed62a9f67721",
+						"0x94771B35e2f5070e35c3dF74F9c47DcC5ACFED33":"0xd97e700e514e78342cb1e70f20fec2cdece708187371346575af76195ef6e80b"
+					}
+					return "For demo purpose use this as private key : <b>"+ address_private[address]+"</b>"
+
+				}
+				
+				function handleErrors(response) {
+					if (!response.ok) {
+						throw Error(response.statusText);
+					}
+					return response;
+				}
+				// When the user clicks on <div>, open the popup
+				function popFunction(id) {
+					console.log(id)
+					var popup = document.getElementById(id);
+					popup.classList.toggle("show");
+				}
+				
+			  </script>
+              <script id="file_template" type="text/x-template">
+                <a href=${File} target="_blank">View File</a>
+            </script>
+	
+	</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Energy Mark</title>
+		<meta charset="utf-8" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1><a href="index.html"><img src="images/logo.png" alt="" width="130" height="48" class="d-inline-block"></a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li class="active">
+								<a href="manage_farmers.html" class="icon solid fa-angle-down">Energy Farmers</a>
+								<ul>
+									<li><a href="manage_farmers.html">Manage Energy Farmers</a></li>
+									<li><a href="energy_catalog.html">Manage Energy Catalog</a></li>
+								</ul>
+							</li>
+							
+							<li>
+								<a href="wallet.html" class="icon solid fa-angle-down">Energy Marketplace</a>
+								<ul>
+									<li ><a href="wallet.html">Energy Wallet</a></li>
+									<li><a href="nft_view.html">Energy NFT Contracts</a></li>
+								</ul>
+							</li>
+							<li >
+								<a href="manage_consumers.html">Energy Buyers</a>
+							</li>
+							<li>
+								<a href="contact.html">Contact us</a>
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Energy Catalog</h2>
+						<hr>
+						<div class = row>
+						<section class = "col">
+							<header>
+								<h3>Wind Generated Power</h3>
+								<h5>by all listed Farmers</h5>
+							</header>
+							<div id = "wind_power"></div>
+						</section>
+						<section class = "col">
+							<header>
+								<h3>Solar Generated Power</h3>
+								<h5>by all listed Farmers</h5>
+							</header>
+							<div id = "solar_power"></div>
+						</section>
+						<section class = "col">
+							<header>
+								<h3>BioGas Generated Power</h3>
+								<h5>by all listed Farmers</h5>
+							</header>
+							<div id = "bio_gas_power"></div>
+						</section>
+					</div>
+					</header>
+					<div class="box">
+						
+						<!-- <button class="button special col" id="insfrm" onclick="handleInsertFeedbackBtn()"  data-bs-toggle="modal" data-bs-target="#Modal" >Search Farmer</button> -->
+						
+						<div id="feedbackGrid"><h3>Please wait... Fetching Energy Farmers Details</h3></div>
+					</div>
+				</section>
+			  <!-- Modal -->
+				<div class="modal fade" style="margin-top: 2em;" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" 
+				aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+						<h5 class="modal-title" id="ModalLabel">Fill Farmer Details</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="window.location.reload()"></button>
+						</div>
+						<div class="modal-body">
+							<form method="post" id="insertForm"></form>
+							<form method="post" id="updateForm"></form>
+							<form method="post" id="payForm"></form>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="window.location.reload()">Close</button>
+						
+						</div>
+					</div>
+					</div>
+				</div>
+					
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Energy Mark. All rights reserved.</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/deps/jquery.min.js"></script>
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/deps/underscore.js"></script>
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/deps/opt/jsv.js"></script>
+			<script type="text/javascript"
+				src="https://storage.googleapis.com/chart-api-db/CDN/lib/jsonform.js"></script>
+			<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+			<link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuidv4.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+			<script type="text/javascript">
+				document.addEventListener("DOMContentLoaded", _ =>{
+				  // $('#feedbackGrid').hide();
+				  var paramsObj = {}
+				  paramsObj.type = "FireStoreDB";
+				  paramsObj.collection = "Farmers";
+				  paramsObj.queryType = "read";
+				  paramsObj.record = {};
+			
+				  let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj)
+				  fetch(url)
+				  .then(response=>response.json())
+				  .then(data=>{
+					sumAllResources(data);
+					$('#feedbackGrid').html("")
+					$('#feedbackGrid').show();
+					grid = new ej.grids.Grid({
+					  dataSource: data,
+					  allowSelection: true,
+					  allowFiltering: true,
+					  allowTextWrap : true ,
+					  allowSorting: true,
+					  allowPaging: true,
+					  enableVirtualization: true,
+					  toolbar: ['Search'],
+					  filterSettings: { type: 'Menu' },
+					  selectionSettings: { persistSelection: true, type: "Multiple", checkboxOnly: true },
+					  enableHover: false,
+					  enableHeaderFocus: true,
+					  pageSettings: { pageCount: 4, pageSizes: true },
+					  height: 400,
+					  rowHeight: 30,
+					  columns: [
+						  { field: 'FarmerID', headerText: 'ID',width:60},
+						  { field: 'FarmerName', headerText: 'Name',width:150  },
+						  { field: 'WindCapacity', headerText: 'Wind Power Capacity',width:130 },
+						  { field: 'SolarCapacity', headerText: 'Solar Power Capacity',width:130  },
+						  { field: 'BioGasCapacity', headerText: 'BioGas Power Capacity',width:130  },
+						  { field: 'Website', headerText: 'Website' ,visible:false},
+						  { field: 'Region', headerText: 'Region', width: 80 },
+						//   { headerText: 'Action', width: 100,
+						// 	  commands: [{ type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
+						// 	  	{ type: 'Send_Payment', buttonOption: { iconCss: ' e-icons e-send-1', cssClass: 'e-flat' } },
+						// 		{ type: 'Transaction_History', buttonOption: { iconCss: ' e-icons e-clock', cssClass: 'e-flat' } },
+						// 		{ type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }]
+						//   }
+					  ]
+				});
+				grid.appendTo('#feedbackGrid');
+			});
+		});
+				handleInsertFeedbackBtn = () =>{
+				  
+				  let insertFormEle = document.querySelector("#insertForm");
+				  insertFormEle.style.display = "";
+				  $('#feedbackGrid').hide();
+				  $('#insbtn').hide();
+				  $('#updateForm').hide();
+				  $('#payForm').hide();
+				  $('#transactionGrid').hide();
+				  $('#insertForm').html("");
+				  let newUuid = uuidv4();
+				  $('#insertForm').jsonForm({
+					schema: {
+							  FarmerID:{
+								type: 'number',
+								required: true
+							  },
+							  FarmerName:{
+								type: 'string',
+								required: true
+							  },
+							  WindCapacity:{
+								type: "number",
+								required: true,
+								description: "Enter '0' if wind resource is not available\nEnter in MWH",
+							  },
+							  SolarCapacity:{
+								type: "number",
+								required: true,
+								description: "Enter '0' if Solar resource is not available <em>Enter in MWH</em>",
+							  },
+							  BioGasCapacity:{
+								type: "number",
+								required: true,
+								description: "Enter '0' if Bio-Gas resource is not available\nEnter in MWH",
+							  },
+							  Website:{
+								type: 'string'
+							  },
+							  AccountAddress:{
+								type: 'string',
+								required:true
+							  },
+							  Region:{
+								type: 'string'
+							  }
+							},
+					form: [
+					  {
+						key: "FarmerID",
+						type: "text"
+					  },
+					  {
+						key: "FarmerName",
+						type: "text"
+					  },
+					  {
+						key: "WindCapacity",
+						type: "text"
+					  },
+					  {
+						key: "SolarCapacity",
+						type: "text"
+					  },
+					  {
+						key: "BioGasCapacity",
+						type: "text"
+					  },
+					  {
+						key: "Website",
+						type: "text"
+					  },
+					  {
+						key: "AccountAddress",
+						type: "text"
+					  },
+					  {
+						key: "Region",
+						type: "text"
+					  },
+					  {
+						type: "submit",
+						title: "Insert Farmer"
+					  } 
+					],
+					onSubmit: function (errors, values) {
+					  if (errors) {
+						$('#res').html('<p>Please fill required fields!</p>');
+					  }
+					  else {
+						console.log(values);
+						$('#Modal').hide();
+						$('#Modal').modal('hide')
+						var paramsObj = {};
+						paramsObj.type = "FireStoreDB";
+						paramsObj.database = "Industry";
+						paramsObj.collection = "Farmers";
+						paramsObj.queryType = "insert";
+						var record = {};
+						record.FarmerID = values.FarmerID;
+						record.FarmerName = values.FarmerName;
+						record.WindCapacity = values.WindCapacity;
+						record.SolarCapacity = values.SolarCapacity;
+						record.BioGasCapacity = values.BioGasCapacity;
+						record.Website = values.Website;
+						record.AccountAddress = values.AccountAddress;
+						record.Region = values.Region;
+						paramsObj.record = record;
+						let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(paramsObj);
+						fetch(url)
+						.then(response=>response.text())
+						.then(data=>{
+						  alert(data);
+						  var fetchObj = {};
+						  fetchObj.type = "FireStoreDB";
+						  fetchObj.database = "Industry";
+						  fetchObj.collection = "Farmers";
+						  fetchObj.queryType = "read";
+						  fetchObj.record = {};
+						  let url = "https://chart-api-6httuqd2wq-uc.a.run.app?dbParams=" + JSON.stringify(fetchObj);
+						  fetch(url)
+						  .then(response=>response.json())
+						  .then(data=>{
+							grid.dataSource = data;
+							$('#feedbackGrid').show();
+							$('#insbtn').show(); 
+						  })
+						})
+					  }
+					}
+				  });
+				  
+				}
+				
+				function calculateAmount(windCap, solarCap, bioGasCap){
+					var windCal = calculateWindAmount(windCap).cal;
+					var solarCal = calculateSolarAmount(solarCap).cal;
+					var bioGasCal = calculateBioGasAmount(bioGasCap).cal;
+					total = windCal+solarCal+bioGasCal;
+					console.log(total);
+					return total
+				}
+				function sumAllResources(data){
+					var wind_power = data.map(coll => coll.WindCapacity).reduce((acc, capacity) => acc + capacity);
+					$('#wind_power').html(
+						'<h2><b>'+wind_power +'</b></h2><h5 style= "display:inline;">MWH</h5>'
+					)
+					var solar_power = data.map(coll => coll.SolarCapacity).reduce((acc, capacity) => acc + capacity);
+					$('#solar_power').html(
+						'<h2><b>'+solar_power +'</b></h2><h5 style= "display:inline;">MWH</h5>'
+					)
+					var bio_gas_power = data.map(coll => coll.BioGasCapacity).reduce((acc, capacity) => acc + capacity);
+					$('#bio_gas_power').html(
+						'<h2><b>'+bio_gas_power +'</b></h2><h5 style= "display:inline;">MWH</h5>'
+					)
+				}
+
+				function calculateWindAmount(cap){
+					if(cap == 0){
+						return {"cal": 0, "cal_text": "" };
+					}
+					else{
+						var sum = 0;
+						var strng = cap + " MWH calculated as </br>"
+						while(cap > 0){
+							if(cap > 0 && cap <= 30){
+								sum += cap*0.0001;
+								strng += cap+"*0.0001; 0-30 MWH </br>"
+								return {"cal":sum, "cal_text":strng};
+							}
+							else if(cap > 30 && cap <= 90){
+
+								var cap_rem = cap - 30;
+								cap = 30
+								sum += cap_rem*0.000334;
+								strng += cap_rem +"*0.000334; 31-90 MWH +</br>";
+							}
+							else if(cap > 90 && cap <= 210){
+								var cap_rem = cap - 90;
+								cap = 90
+								sum += cap_rem*0.00089;
+								strng += cap_rem +"*0.00089; 91-210 MWH +</br>";
+							}
+							else if(cap > 210 && cap <= 560){
+								var cap_rem = cap - 210;
+								cap = 210
+								sum += cap_rem*0.00132;
+								strng += cap_rem +"*0.00132; 211-560 MWH +</br>";
+							}
+							else{
+								var cap_rem = cap - 560;
+								cap = 560
+								sum += cap_rem*0.005;
+								strng += cap_rem +"*0.005; 560 MWH and Above +</br>";
+							}
+						}
+					}
+				}
+
+				function calculateSolarAmount(cap){
+					if(cap == 0){
+						return {"cal": 0, "cal_text": "" };
+					}
+					else{
+						var sum = 0
+						var strng = cap + " MWH calculated as </br>"
+						while(cap > 0){
+							if(cap > 0 && cap <= 30){
+								sum += cap*0.0002
+								strng += cap+"*0.0002; 0-30 MWH </br>"
+								return {"cal":sum, "cal_text":strng};
+							}
+							else if(cap > 30 && cap <= 90){
+
+								var cap_rem = cap - 30;
+								cap = 30
+								sum += cap_rem*0.000534
+								strng += cap_rem +"*0.000534; 31-90 MWH +</br>";
+							}
+							else if(cap > 90 && cap <= 210){
+								var cap_rem = cap - 90;
+								cap = 90
+								sum += cap_rem*0.00139
+								strng += cap_rem +"*0.00139; 91-210 MWH +</br>";
+							}
+							else if(cap > 210 && cap <= 560){
+								var cap_rem = cap - 210;
+								cap = 210
+								sum += cap_rem*0.00245
+								strng += cap_rem +"*0.00245; 211-560 MWH +</br>";
+							}
+							else{
+								var cap_rem = cap - 560;
+								cap = 560
+								sum += cap_rem*0.007
+								strng += cap_rem +"*0.007; 560 MWH and Above +</br>";
+							}
+						}
+					}
+				}
+
+				function calculateBioGasAmount(cap){
+					if(cap == 0){
+						return {"cal": 0, "cal_text": "" };
+					}
+					else{
+						var sum = 0
+						var strng = cap + " MWH calculated as </br>"
+						while(cap > 0){
+							if(cap > 0 && cap <= 30){
+								sum += cap*0.00005
+								strng += cap+"*0.00005; 0-30 MWH </br>"
+								return {"cal":sum, "cal_text":strng};
+							}
+							else if(cap > 30 && cap <= 90){
+
+								var cap_rem = cap - 30;
+								cap = 30
+								sum += cap_rem*0.000134
+								strng += cap_rem +"*0.000134; 31-90 MWH +</br>";
+							}
+							else if(cap > 90 && cap <= 210){
+								var cap_rem = cap - 90;
+								cap = 90
+								sum += cap_rem*0.00056
+								strng += cap_rem +"*0.00056; 91-210 MWH +</br>";
+							}
+							else if(cap > 210 && cap <= 560){
+								var cap_rem = cap - 210;
+								cap = 210
+								sum += cap_rem*0.000845
+								strng += cap_rem +"*0.000845; 211-560 MWH +</br>";
+							}
+							else{
+								var cap_rem = cap - 560;
+								cap = 560
+								sum += cap_rem*0.001
+								strng += cap_rem +"*0.001; 561 MWH and Above +</br>";
+							}
+						}
+					}
+				}
+			
+				function handleErrors(response) {
+					if (!response.ok) {
+						throw Error(response.statusText);
+					}
+					return response;
+				}
+				// When the user clicks on <div>, open the popup
+				function popFunction(id) {
+					console.log(id)
+					var popup = document.getElementById(id);
+					popup.classList.toggle("show");
+				}
+				
+			  </script>
+	
+	</body>
+</html>
